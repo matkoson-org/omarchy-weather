@@ -62,6 +62,10 @@ function imperial(units) {
   return true; // imperial default; "auto" resolves to US on this machine
 }
 
+function windUnitLabel(units) {
+  return imperial(units) ? "mph" : "km/h";
+}
+
 function buildForecastUrl(lat, lon, units) {
   var us = imperial(units);
   var temp = us ? "fahrenheit" : "celsius";

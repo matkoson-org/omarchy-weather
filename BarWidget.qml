@@ -211,7 +211,7 @@ BarWidget {
   onSettingsChanged: injectPanel()
 
   visible: true
-  implicitWidth: buttonRow.implicitWidth + 8
+  implicitWidth: buttonRow.implicitWidth + 2 * Style.spaceReal(7.5)
   implicitHeight: bar && bar.contentHeight !== undefined ? bar.contentHeight : 24
 
   Row {
@@ -219,11 +219,26 @@ BarWidget {
     anchors.centerIn: parent
     spacing: 5
 
-    Text {
-      text: root.iconGlyph
-      font.family: root.fontFamily
-      font.pixelSize: Style.font.iconLarge
+    // The icon's box is as wide as its painted glyph (a thermometer is narrow,
+    // its font's advance is not), so it is padded like the bar's other widgets.
+    Item {
+      width: iconInk.tightBoundingRect.width
+      height: iconText.implicitHeight
       anchors.verticalCenter: parent.verticalCenter
+
+      Text {
+        id: iconText
+        x: -iconInk.tightBoundingRect.x
+        text: root.iconGlyph
+        font.family: root.fontFamily
+        font.pixelSize: Style.font.iconLarge
+      }
+
+      TextMetrics {
+        id: iconInk
+        text: iconText.text
+        font: iconText.font
+      }
     }
 
     Text {

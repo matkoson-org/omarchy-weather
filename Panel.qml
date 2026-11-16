@@ -940,8 +940,8 @@ Panel {
     function add(label, value, level) { cells.push({ label: label, value: value, level: level }); }
     if (!c)
       return cells;
-    add("Wind", Model.windDir(c.wind_direction_10m) + " " + Math.round(Number(c.wind_speed_10m)) + " mph");
-    add("Gusts", Number(c.wind_gusts_10m) > 0 ? Math.round(Number(c.wind_gusts_10m)) + " mph" : "—");
+    add("Wind", Model.windDir(c.wind_direction_10m) + " " + Math.round(Number(c.wind_speed_10m)) + " " + Model.windUnitLabel(root.units));
+    add("Gusts", Number(c.wind_gusts_10m) > 0 ? Math.round(Number(c.wind_gusts_10m)) + " " + Model.windUnitLabel(root.units) : "—");
     add("Humidity", Math.round(Number(c.relative_humidity_2m)) + "%", Number(c.relative_humidity_2m) / 100);
     add("Pressure", Math.round(Number(c.surface_pressure)) + " hPa");
     add("UV", Math.round(Number(c.uv_index) * 10) / 10 + " " + Model.uvCategory(c.uv_index), Math.min(1, Number(c.uv_index) / 11));
